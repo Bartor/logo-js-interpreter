@@ -23,7 +23,10 @@ class Logo {
 
         let outputString = '';
 
+        console.log(input);
+
         for(let i = 0; i < input.length;) {
+            console.log(input[i]);
             switch(input[i].toLocaleLowerCase()) {
                 case "fd": {
                     let value = this.checkInt(input[i+1]);
@@ -56,13 +59,12 @@ class Logo {
                     j++;
                     while (bracket != 0) {
                         j++;
-                        console.log(input[j]);
                         if(input[j] == '[') bracket++;
                         if(input[j] == ']') bracket--;
                         if(input[j] === undefined) throw "Incorrect paramter syntax";
                     }
                     outputString += this.repeat(value, input.slice(i + 2, j)) + ", ";
-                    i = j + 1;
+                    i = j;
                     break;
                 }
                 case "up": {
@@ -74,7 +76,7 @@ class Logo {
                     break;
                 }
                 default: {
-                    throw "Incorrect parameter syntax";
+                    throw "Unkown command";
                 }
             }
             i++;
