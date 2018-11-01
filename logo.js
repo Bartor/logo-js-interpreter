@@ -24,30 +24,33 @@ class Logo {
         let outputString = '';
 
         for(let i = 0; i < input.length;) {
-            let value = parseInt(input[i+1]);
-            if (isNaN(value)) throw "Argument value must be a number";
             switch(input[i].toLocaleLowerCase()) {
                 case "fd": {
+                    let value = this.checkInt(input[i+1]);
                     outputString += this.fd(value) + ", ";
                     i++;
                     break;
                 }
                 case "bk":{
+                    let value = this.checkInt(input[i+1]);
                     outputString += this.bk(value) + ",";
                     i++;
                     break;
                 }
                 case "rt": {
+                    let value = this.checkInt(input[i+1]);
                     outputString += this.rt(value) + ", ";
                     i++;
                     break;
                 }
                 case "lt": {
+                    let value = this.checkInt(input[i+1]);
                     outputString += this.lt(value) + ", ";
                     i++;
                     break;
                 }
                 case "repeat": {
+                    let value = checkInt(input[i+1]);
                     let bracket = 1;
                     let j = ++i;
                     j++;
@@ -60,6 +63,14 @@ class Logo {
                     }
                     outputString += this.repeat(value, input.slice(i + 2, j)) + ", ";
                     i = j + 1;
+                    break;
+                }
+                case "up": {
+                    outputString += this.up() + ", ";
+                    break;
+                }
+                case "down": {
+                    outputString += this.down() + ", ";
                     break;
                 }
                 default: {
@@ -105,10 +116,12 @@ class Logo {
 
     up() {
         this.stroke = false;
+        return "Raised the pencil";
     }
 
     down() {
         this.stroke = true;
+        return "Lowered the pencil";
     }
 
     repeat(number, repeatStatements) {
@@ -119,4 +132,9 @@ class Logo {
         return outputString + ' ]';
     }
 
+    checkInt(value) {
+        let v = parseInt(value);
+        if (isNaN(v)) throw "Argument must be a number";
+        return v;
+    }
 }
