@@ -1,11 +1,155 @@
+<!DOCTYPE html>
 <html>
     <head>
-        <script src="logo.js"> </script>
+        <script src="logo.js"></script>
+        <script>
+            const cmd = (text) => {
+                let output = document.getElementById('output');
+                let commandNode = document.createElement('div');
+                commandNode.className = 'cmd msg';
+                let textNode = document.createTextNode(text);
+                commandNode.appendChild(textNode);
+                output.appendChild(commandNode);
+                scrollDown();
+            }
+            const out = (text) => {
+                let output = document.getElementById('output');
+                let outputNode = document.createElement('div');
+                outputNode.className = 'out msg';
+                let textNode = document.createTextNode(text);
+                outputNode.appendChild(textNode);
+                output.appendChild(outputNode);
+                scrollDown();
+            }
+            const err = (text) => {
+                let output = document.getElementById('output');
+                let errorNode = document.createElement('div');
+                errorNode.className = 'err msg';
+                let textNode = document.createTextNode(text);
+                errorNode.appendChild(textNode);
+                output.appendChild(errorNode);
+                scrollDown();
+            }
+            const scrollDown = () => {
+                document.getElementById('output').scrollTop = document.getElementById('output').scrollHeight;
+            }
+            const send = () => {
+                let inputField = document.getElementById('input');
+                let input = inputField.value.trim();
+                if (input !== '') {
+                    cmd (input);
+                    try {
+                        out(logo.parse(input));
+                    } catch(e) {
+                        err(e);
+                    }
+                }
+                inputField.value = '';
+            }
+        </script>
+        <style>
+            * {
+                box-sizing: border-box;
+                font-family: 'Courier New';
+            }
+            html, body { 
+                height: 100%;
+                overflow: hidden;
+            } 
+            .flex-container {
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .centered {
+                text-align: center;
+            }
+            .box {
+                flex-grow: 0;
+                display: flex;
+                flex-flow: column;
+                align-content: stretch;
+            }
+            .controls {
+                display: flex;
+                align-items: stretch;
+                justify-content: center;
+            }
+            .iobox {
+                width: 400px;
+                margin: 5px;
+            }
+            .output {
+                height: 200px;
+                overflow-y: auto;
+                overflow-x: hidden;
+            }
+            .output::-webkit-scrollbar {
+                background-color: white;
+            }
+            .output::-webkit-scrollbar-thumb {
+                background-color: black;
+            }
+            .msg {
+                word-break: break-all;
+                border: 0;
+                border-top: 1px black solid;
+            }
+            .out {
+                font-weight: bold;
+            }
+            .err {
+                font-weight: bold;
+                color: red;
+            }
+            .input {
+                padding: 2px;
+                width: 100%;
+                border: 2px black solid;
+            }
+            .confirm {
+                margin: 5px;
+                width: 100px;
+                background-color: white;
+                border: 2px black solid;
+                flex: 0 0 auto;
+            }
+            .confirm:active {
+                background-color: lightgray;
+            }
+            #canvas {
+                margin: 5px;
+                border: 2px black solid;
+            }
+        </style>
     </head>
     <body>
-        <canvas id="canvas" width="500" height="500"></canvas>
+        <div class="flex-container">
+            <div class="box">
+                <div class="centered">
+                    <h1>Logo</h1>
+                </div>
+                <canvas id="canvas" width="500" height="500"></canvas>
+                <div class="controls">
+                    <div class="iobox">
+                        <div class="output" id="output">
+
+                        </div>
+                        <input class="input" id="input" type="text">
+                    </div>
+                    <button class="confirm" onclick="send();">Enter</button>
+                </div>
+            </div>
+        </div>
         <script>
-            let logo = new Logo(document.getElementById('canvas'));
+            var logo = new Logo(document.getElementById('canvas'));
+            document.getElementById('input').addEventListener('keyup', (event) => {
+                event.preventDefault();
+                if (event.keyCode === 13) {
+                    send();
+                }
+            });
         </script>
     </body>
 </html>
