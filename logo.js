@@ -23,10 +23,7 @@ class Logo {
 
         let outputString = '';
 
-        console.log(input);
-
         for(let i = 0; i < input.length;) {
-            console.log(input[i]);
             switch(input[i].toLocaleLowerCase()) {
                 case "fd": {
                     let value = this.checkInt(input[i+1]);
