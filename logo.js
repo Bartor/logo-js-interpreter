@@ -50,7 +50,7 @@ class Logo {
                     break;
                 }
                 case "repeat": {
-                    let value = checkInt(input[i+1]);
+                    let value = this.checkInt(input[i+1]);
                     let bracket = 1;
                     let j = ++i;
                     j++;
