@@ -9,11 +9,11 @@ Plik `page.html` jest przykładową stroną z zaimplementowaną podstawową funk
 
 ### Instalacja
 
-Pobierz lub skolonuj, otwórz page.html w przegladarce.
+Pobierz lub skolonuj, otwórz `page.html` w przegladarce.
 
 ### Użycie
 
-`Logo.js` rozpoznaje jak na razie siedem komend: 
+Interpreter rozpoznaje jak na razie siedem komend: 
 ```
 fd (val) - ruch do przodu o val pikseli
 bk (val) - ruch do tyłu o val pikseli
