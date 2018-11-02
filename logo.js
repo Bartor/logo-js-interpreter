@@ -24,33 +24,34 @@ class Logo {
         let outputString = '';
 
         for(let i = 0; i < input.length;) {
+            console.log(input[i]);
             switch(input[i].toLocaleLowerCase()) {
                 case "fd": {
-                    let value = this.checkInt(input[i+1]);
+                    let value = this.preprocessor(input[i+1]);
                     outputString += this.fd(value) + ", ";
                     i++;
                     break;
                 }
                 case "bk":{
-                    let value = this.checkInt(input[i+1]);
+                    let value = this.preprocessor(input[i+1]);
                     outputString += this.bk(value) + ",";
                     i++;
                     break;
                 }
                 case "rt": {
-                    let value = this.checkInt(input[i+1]);
+                    let value = this.preprocessor(input[i+1]);
                     outputString += this.rt(value) + ", ";
                     i++;
                     break;
                 }
                 case "lt": {
-                    let value = this.checkInt(input[i+1]);
+                    let value = this.preprocessor(input[i+1]);
                     outputString += this.lt(value) + ", ";
                     i++;
                     break;
                 }
                 case "repeat": {
-                    let value = this.checkInt(input[i+1]);
+                    let value = this.preprocessor(input[i+1]);
                     let bracket = 1;
                     let j = ++i;
                     j++;
@@ -131,9 +132,27 @@ class Logo {
         return outputString + ' ]';
     }
 
-    checkInt(value) {
+    preprocessor(value) {
         let v = parseInt(value);
-        if (isNaN(v)) throw "Argument must be a number";
+        if (isNaN(v)) {
+            switch (value) {
+                case ":x": {
+                    v = Math.round(this.xPos); //rounding is necessary in this version due to possible as n usage in repeat n [ ... ]
+                    break;
+                }
+                case ":y": {
+                    v = Math.round(this.yPos);
+                    break;
+                }
+                case ":r": {
+                    v = this.rotation;
+                    break;
+                }
+                default: {
+                    throw "Unrecognizable argument"
+                }
+            }
+        }
         return v;
     }
 }
