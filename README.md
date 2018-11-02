@@ -23,6 +23,12 @@ up - podniesienie pióra
 down - opuszczenie pióra
 repeat (val) [ (cmd...) ] - powtórzenie val razy listy komend w cmd
 ```
+oraz trzy zmienne preprocesora:
+```
+:x - aktualna pozycja w poziomie
+:y - aktualna pozycja w pionie
+:r - aktualny obrót
+```
 Przykład
 ```
 repeat 12 [ fd 50 repeat 3 [ fd 10 rt 120 ] rt 30 repeat 3 [ bk 10 lt 120 ] ]
