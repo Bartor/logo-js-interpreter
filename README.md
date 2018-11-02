@@ -1,6 +1,6 @@
 # Interpreter Logomocji w JS
 
-Mały projekt zrobiony z nudów
+Mały projekt zrobiony z nudów, podgląd (najpewniej) aktualnej wersji na [mojej stronie](https://bartor.net/logo-js-interpreter/page.html).
 
 ### Zawartość
 
